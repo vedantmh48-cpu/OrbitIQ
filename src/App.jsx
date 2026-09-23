@@ -76,7 +76,8 @@ function useOrbitInteractions() {
         { x: .42, y: .86, r: .34, ax: .00008, ay: -.00007, h: '155,123,255', a: .4 },
       ];
       const dust = Array.from({ length: 24 }, () => ({ x: Math.random(), y: Math.random(), r: Math.random() * .9 + .5, a: Math.random() * .5 + .14, vx: (Math.random() - .5) * .00022, vy: (Math.random() - .5) * .00022 }));
-      let meteor = null, meteorNext = 0;
+      const fallingStars = Array.from({ length: 28 }, () => ({ x: Math.random(), y: Math.random() * 1.2 - .2, len: Math.random() * 30 + 12, sp: Math.random() * .0011 + .00045, a: Math.random() * .5 + .18, o: Math.random() * 7 }));
+      let meteors = [], meteorNext = 0;
       const scenePaused = () => document.hidden || ['tech', 'carto'].includes(document.body.dataset.scene);
       const paint = (time = 0) => {
         if (!context) return;
@@ -91,23 +92,24 @@ function useOrbitInteractions() {
           grad.addColorStop(0, `rgba(${nb.h},${na})`); grad.addColorStop(1, `rgba(${nb.h},0)`);
           context.fillStyle = grad; context.fillRect(0, 0, w, h);
         });
-        if (!meteor && time > meteorNext && Math.random() < .05) {
+        if (time > meteorNext && meteors.length < 5 && Math.random() < .35) {
           const fromLeft = Math.random() < .5;
-          meteor = { x: fromLeft ? -(Math.random() * .08) * w : w * (.12 + Math.random() * .8), y: (Math.random() * .34) * h, vx: (fromLeft ? 1 : -1) * (0.9 + Math.random() * .7) * w * .0016, vy: (0.55 + Math.random() * .45) * h * .0016, life: 1, hue: Math.random() < .4 ? '236,236,244' : '63,217,232' };
-          meteorNext = time + 6 + Math.random() * 10;
+          meteors.push({ x: fromLeft ? -(Math.random() * .1) * w : w * (.1 + Math.random() * .8), y: (Math.random() * .5) * h, vx: (fromLeft ? 1 : -1) * (0.85 + Math.random() * .75) * w * .0018, vy: (0.5 + Math.random() * .55) * h * .0018, life: 1, hue: Math.random() < .45 ? '235,239,248' : (Math.random() < .5 ? '63,217,232' : '155,123,255') });
+          meteorNext = time + 2 + Math.random() * 4.5;
         }
-        if (meteor) {
-          meteor.life -= .08; meteor.x += meteor.vx; meteor.y += meteor.vy;
-          if (meteor.life > 0) {
-            const tailX = meteor.x - meteor.vx * 6, tailY = meteor.y - meteor.vy * 6;
-            const mg = context.createLinearGradient(tailX, tailY, meteor.x, meteor.y);
-            mg.addColorStop(0, `rgba(${meteor.hue},0)`); mg.addColorStop(1, `rgba(${meteor.hue},${.85 * meteor.life})`);
-            context.strokeStyle = mg; context.lineWidth = 1.6; context.lineCap = 'round';
-            context.beginPath(); context.moveTo(tailX, tailY); context.lineTo(meteor.x, meteor.y); context.stroke();
-            context.fillStyle = `rgba(${meteor.hue},${meteor.life * .85})`;
-            context.beginPath(); context.arc(meteor.x, meteor.y, 1.7, 0, 7); context.fill();
+        for (let i = meteors.length - 1; i >= 0; i--) {
+          const m = meteors[i];
+          m.life -= .055; m.x += m.vx; m.y += m.vy;
+          if (m.life > 0) {
+            const tailX = m.x - m.vx * 5.5, tailY = m.y - m.vy * 5.5;
+            const mg = context.createLinearGradient(tailX, tailY, m.x, m.y);
+            mg.addColorStop(0, `rgba(${m.hue},0)`); mg.addColorStop(1, `rgba(${m.hue},${.85 * m.life})`);
+            context.strokeStyle = mg; context.lineWidth = 1.5; context.lineCap = 'round';
+            context.beginPath(); context.moveTo(tailX, tailY); context.lineTo(m.x, m.y); context.stroke();
+            context.fillStyle = `rgba(${m.hue},${m.life * .9})`;
+            context.beginPath(); context.arc(m.x, m.y, 1.9, 0, 7); context.fill();
           }
-          if (meteor.life <= 0 || meteor.y > h * 1.05 || meteor.x < -w * .1 || meteor.x > w * 1.1) meteor = null;
+          if (m.life <= 0 || m.y > h * 1.05 || m.x < -w * .12 || m.x > w * 1.12) meteors.splice(i, 1);
         }
         dust.forEach((d) => {
           d.x += d.vx; d.y += d.vy;
@@ -121,6 +123,16 @@ function useOrbitInteractions() {
           context.beginPath(); context.arc(star.x * w, star.y * h, star.r, 0, 7);
           context.fillStyle = `rgba(233,239,246,${Math.max(0, star.a + Math.sin(time * 1.4 + index) * .08)})`;
           context.fill();
+        });
+        fallingStars.forEach((fs) => {
+          fs.y += fs.sp;
+          if (fs.y > 1.08) { fs.y = -0.05; fs.x = Math.random(); fs.len = Math.random() * 30 + 12; }
+          const fx = fs.x * w, fy = fs.y * h;
+          const tw = Math.max(0, fs.a * (.55 + .45 * Math.sin(time * 1.1 + fs.o)));
+          const fg = context.createLinearGradient(fx, fy, fx, fy + fs.len);
+          fg.addColorStop(0, `rgba(194,225,250,${tw})`); fg.addColorStop(1, 'rgba(194,225,250,0)');
+          context.strokeStyle = fg; context.lineWidth = 1; context.lineCap = 'round';
+          context.beginPath(); context.moveTo(fx, fy); context.lineTo(fx, fy + fs.len); context.stroke();
         });
       };
       paint();
@@ -281,7 +293,51 @@ function useOrbitInteractions() {
     document.querySelectorAll('.team-card').forEach((card) => {
       add(card, 'click', (event) => { if (event.target.closest('a, button')) return; openTeamDialog(card); });
       add(card, 'keydown', (event) => { if ((event.key === 'Enter' || event.key === ' ') && event.target === card) { event.preventDefault(); openTeamDialog(card); } });
+      card.querySelectorAll('.member-view').forEach((button) => add(button, 'click', (event) => { event.preventDefault(); event.stopPropagation(); openTeamDialog(card); }));
     });
+
+    /* ---------- contact form (POST /api/contact) ---------- */
+    const contactForm = document.querySelector('.contact-form');
+    if (contactForm) {
+      const cfName = document.getElementById('cf-name');
+      const cfEmail = document.getElementById('cf-email');
+      const cfSubject = document.getElementById('cf-subject');
+      const cfMessage = document.getElementById('cf-message');
+      const cfButton = contactForm.querySelector('button[type=submit]');
+      const cfOk = contactForm.querySelector('.cf-ok');
+      const cfErr = contactForm.querySelector('.cf-err');
+      const apiBase = (import.meta.env.VITE_API_URL || '').replace(/\/+$/, '');
+      add(contactForm, 'submit', (event) => {
+        event.preventDefault();
+        if (cfButton.disabled) return;
+        const original = cfButton.innerHTML;
+        cfOk.hidden = true;
+        cfErr.hidden = true;
+        cfButton.disabled = true;
+        cfButton.textContent = 'Sending…';
+        fetch(`${apiBase}/api/contact`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: cfName.value.trim(),
+            email: cfEmail.value.trim(),
+            subject: cfSubject.value.trim(),
+            message: cfMessage.value.trim(),
+          }),
+        })
+          .then((response) => response.json().catch(() => ({})).then((body) => {
+            if (!response.ok || !body.success) throw new Error('request-failed');
+            cfOk.hidden = false;
+            cfButton.textContent = 'Message sent';
+            contactForm.reset();
+          }))
+          .catch(() => {
+            cfButton.disabled = false;
+            cfButton.innerHTML = original;
+            cfErr.hidden = false;
+          });
+      });
+    }
 
     return () => { abort.abort(); window.clearInterval(twinkle); window.clearInterval(moodTimer); cancelAnimationFrame(cursorFrame); revealObserver.disconnect(); navObserver.disconnect(); document.documentElement.classList.remove('oi-cur', 'oi-anim'); document.body.classList.remove('js', 'oi-lock', 'oi-obs'); document.body.style.overflow = ''; document.body.removeAttribute('data-mood'); };
   }, []);

@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#05080E">
+<link rel="icon" type="image/png" href="./logo.png">
 <title>Orbit IQ — Cross-Platform Satellite Intelligence</title>
 <meta name="description" content="Orbit IQ is an AI-powered satellite intelligence application — ask about the Earth in natural language and explore satellite data through visual analysis across desktop and mobile platforms.">
 <meta property="og:type" content="website">
@@ -318,14 +319,15 @@ body.oi-obs .oc-label{opacity:1}
 
 /* ===== TEAM CARDS (floating glass cards) ===== */
 .team-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(22px,2.6vw,30px);margin-top:clamp(44px,6vw,80px)}
-.team-card{position:relative;display:flex;flex-direction:column;padding:clamp(22px,2.6vw,30px) clamp(18px,2vw,26px);border-radius:24px;border:1px solid rgba(160,190,218,.22);background:linear-gradient(155deg,rgba(19,31,52,.6),rgba(8,13,22,.68));-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);box-shadow:0 24px 56px -28px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.07);transition:border-color .35s,box-shadow .5s;animation:teamFloat 7s var(--ease) infinite;animation-delay:calc(-1.4s*var(--ti,0));will-change:transform}
+.team-card{position:relative;display:flex;flex-direction:column;padding:clamp(22px,2.6vw,30px) clamp(18px,2vw,26px);border-radius:24px;border:1px solid rgba(160,190,218,.22);background:linear-gradient(155deg,rgba(19,31,52,.6),rgba(8,13,22,.68));-webkit-backdrop-filter:blur(18px) saturate(1.4);backdrop-filter:blur(18px) saturate(1.4);box-shadow:0 24px 56px -28px rgba(0,0,0,.9),inset 0 1px 0 rgba(255,255,255,.07);transition:border-color .35s,box-shadow .5s;animation:teamCinema 12s var(--ease) infinite;animation-delay:calc(-2.4s*var(--ti,0));will-change:transform}
 .team-card::before{content:'';position:absolute;inset:-1px;border-radius:24px;background:linear-gradient(135deg,rgba(67,227,246,.2),transparent 28%,transparent 72%,rgba(27,127,219,.16));pointer-events:none;opacity:.55}
 .team-card::after{content:'';position:absolute;top:0;left:14px;right:14px;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.26),transparent)}
 .team-card:hover{border-color:rgba(67,227,246,.55);box-shadow:0 34px 76px -32px rgba(0,0,0,.92),0 0 0 1px rgba(67,227,246,.14),0 20px 52px -22px rgba(67,227,246,.3);animation-play-state:paused}
-@keyframes teamFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes teamCinema{0%{transform:translate3d(0,0,0) scale(1)}22%{transform:translate3d(0,-9px,0) scale(1.055)}50%{transform:translate3d(0,3px,0) scale(.97)}78%{transform:translate3d(0,-4px,0) scale(1.03)}100%{transform:translate3d(0,0,0) scale(1)}}
 .tc{display:flex;flex-direction:column;animation-delay:calc(.05s + .06s*var(--ti,0))!important}
 .member-photo{position:relative;width:clamp(88px,9vw,118px);height:clamp(88px,9vw,118px);border-radius:50%;overflow:hidden;flex-shrink:0;margin:0 auto 20px;border:1px solid rgba(160,190,218,.3);box-shadow:0 0 0 5px rgba(67,227,246,.09),0 12px 28px -14px rgba(0,0,0,.85)}
-.member-photo img{width:100%;height:100%;object-fit:cover;transition:opacity .45s}
+.member-photo img{width:100%;height:100%;object-fit:cover;transition:opacity .45s,transform 1.3s var(--ease),filter 1.3s var(--ease);will-change:transform}
+.team-card:hover .member-photo img{transform:scale(1.16);filter:brightness(1.1)}
 .member-photo img.err{opacity:0}
 .member-photo img:not(.err) + .ph{display:none}
 .member-photo .ph{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--fd);font-weight:800;font-size:clamp(24px,2.6vw,32px);letter-spacing:.02em;color:var(--cyan);background:radial-gradient(120% 120% at 30% 25%,rgba(24,40,66,.92),rgba(7,11,19,.95));text-shadow:0 2px 12px rgba(0,0,0,.6)}
@@ -487,9 +489,10 @@ footer::after{content:'';position:absolute;top:0;left:50%;transform:translateX(-
 /* ===== TEAM MEMBER PROFILE CARD (opens from "View profile" on .team-card) ===== */
 .team-card{cursor:pointer}
 .team-card:focus-visible{outline:2px solid rgba(67,227,246,.7);outline-offset:4px}
-.team-card .member-view{display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:8px 14px;border:1px solid rgba(67,227,246,.35);border-radius:999px;font-family:var(--fm);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);background:rgba(67,227,246,.07);opacity:0;transform:translateY(5px);transition:opacity .3s var(--ease),transform .3s var(--ease),background .3s,border-color .3s}
-.team-card .member-view::after{content:'\2192';margin-left:2px}
-.team-card:hover .member-view,.team-card:focus-visible .member-view{opacity:1;transform:none}
+.team-card .member-view{display:inline-flex;align-items:center;justify-content:center;gap:8px;align-self:center;margin-top:16px;padding:9px 16px;border:1px solid rgba(67,227,246,.42);border-radius:999px;font-family:var(--fm);font-size:9px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--cyan);background:rgba(67,227,246,.09);cursor:pointer;transition:opacity .3s var(--ease),transform .3s var(--ease),background .3s,border-color .3s,box-shadow .3s}
+.team-card .member-view .mv-ico{width:13px;height:13px;flex-shrink:0;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.team-card .member-view:hover{background:rgba(67,227,246,.18);border-color:rgba(67,227,246,.8);box-shadow:0 10px 24px -12px rgba(67,227,246,.55);transform:translateY(-1px)}
+@media (hover:hover) and (pointer:fine){.team-card .member-view{opacity:0;transform:translateY(5px)}.team-card:hover .member-view,.team-card:focus-visible .member-view,.team-card:focus-within .member-view{opacity:1;transform:none}}
 .team-dialog{background:radial-gradient(90% 68% at 50% 2%,rgba(67,227,246,.06),transparent 62%),rgba(4,7,12,.76)}
 .team-dialog-panel{position:relative;width:min(720px,100%);max-height:min(86vh,780px);max-height:min(86dvh,780px);border:1px solid rgba(160,190,218,.2);border-radius:20px;background:linear-gradient(158deg,rgba(17,27,45,.97),rgba(7,11,19,.99));box-shadow:0 42px 96px -36px rgba(0,0,0,.95),0 0 0 1px rgba(67,227,246,.07),inset 0 1px 0 rgba(255,255,255,.07);overflow:hidden;transform:translateY(10px) scale(.985)}
 .team-dialog-panel::before{content:'';position:absolute;inset:0;border-radius:inherit;background:linear-gradient(138deg,rgba(67,227,246,.16),transparent 32%,transparent 68%,rgba(27,127,219,.14));opacity:.5;pointer-events:none}
@@ -683,7 +686,7 @@ footer::after{content:'';position:absolute;top:0;left:50%;transform:translateX(-
 </style>
 </head>
 <body>
-<!-- ORBIT IQ OFFICIAL LOGO: logo.png, used in the navbar and footer. -->
+<!-- ORBIT IQ OFFICIAL LOGO: PNG (public/logo.png), used inline in the navbar and footer. -->
 
 <div class="bg-stack" aria-hidden="true">
   <div class="base"></div>
@@ -715,7 +718,7 @@ footer::after{content:'';position:absolute;top:0;left:50%;transform:translateX(-
 <nav class="navbar" id="navbar" aria-label="Primary">
   <div class="wrap nav-inner">
     <a href="#home" class="brand" aria-label="Orbit IQ home">
-      <img class="brand-logo" src="logo.png" alt="Orbit IQ" width="210" height="70">
+      <img class="brand-logo" src="logo.png" alt="Orbit IQ">
     </a>
     <div class="nav-links">
       <a href="#home" class="active">Home</a>
@@ -991,7 +994,7 @@ footer::after{content:'';position:absolute;top:0;left:50%;transform:translateX(-
           </div>
         </div>
         <div class="member-links"><a href="https://github.com/vedantmh48-cpu" target="_blank" rel="noopener noreferrer" aria-label="Open Vedant Mhatre's GitHub"><span class="ico" aria-hidden="true">GH</span>GitHub</a><a class="member-link--linkedin" href="https://www.linkedin.com/in/vedant-mhatre-4aa554423/" target="_blank" rel="noopener noreferrer" aria-label="Open Vedant Mhatre's LinkedIn"><span class="ico" aria-hidden="true">in</span>LinkedIn</a><a href="mailto:vedantmh48@gmail.com" aria-label="Email Vedant Mhatre"><span class="ico" aria-hidden="true">@</span>Email</a></div>
-      </div><span class="member-view" aria-hidden="true">View profile</span></div>
+      <button type="button" class="member-view" data-open-profile aria-label="View profile"><svg class="mv-ico" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8Z"/><circle cx="12" cy="12" r="3"/></svg>View profile</button></div></div>
       <div class="team-card" style="--ti:1" role="button" tabindex="0" aria-haspopup="dialog" aria-label="Open profile dialog for Yogesh Tiwari"><div class="tc st-item">
         <div class="member-photo"><img src="/yogesh.jpeg" alt="Yogesh Tiwari" loading="lazy" draggable="false" onerror="this.classList.add('err');this.onerror=null"><span class="ph" aria-hidden="true">YT</span></div>
         <button type="button" class="member-name-btn" aria-expanded="false" aria-controls="m1"><span class="member-name">Yogesh Tiwari</span><span class="member-fold" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M6 2v8M2 6h8"/></svg></span></button>
@@ -1006,7 +1009,7 @@ footer::after{content:'';position:absolute;top:0;left:50%;transform:translateX(-
           </div>
         </div>
         <div class="member-links"><a href="https://github.com/yogesh1636" target="_blank" rel="noopener noreferrer" aria-label="Open Yogesh Tiwari's GitHub"><span class="ico" aria-hidden="true">GH</span>GitHub</a><a class="member-link--linkedin" href="https://www.linkedin.com/in/yogesh-tiwari-8ab29b423" target="_blank" rel="noopener noreferrer" aria-label="Open Yogesh Tiwari's LinkedIn"><span class="ico" aria-hidden="true">in</span>LinkedIn</a><a href="mailto:yogesh2808e@gmail.com" aria-label="Email Yogesh Tiwari"><span class="ico" aria-hidden="true">@</span>Email</a></div>
-      </div><span class="member-view" aria-hidden="true">View profile</span></div>
+      <button type="button" class="member-view" data-open-profile aria-label="View profile"><svg class="mv-ico" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8Z"/><circle cx="12" cy="12" r="3"/></svg>View profile</button></div></div>
       <div class="team-card" style="--ti:2" role="button" tabindex="0" aria-haspopup="dialog" aria-label="Open profile dialog for Anuj Gupta"><div class="tc st-item">
         <div class="member-photo"><img src="/anuj.jpeg" alt="Anuj Gupta" loading="lazy" draggable="false" onerror="this.classList.add('err');this.onerror=null"><span class="ph" aria-hidden="true">AG</span></div>
         <button type="button" class="member-name-btn" aria-expanded="false" aria-controls="m2"><span class="member-name">Anuj Gupta</span><span class="member-fold" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M6 2v8M2 6h8"/></svg></span></button>
@@ -1021,7 +1024,7 @@ footer::after{content:'';position:absolute;top:0;left:50%;transform:translateX(-
           </div>
         </div>
         <div class="member-links"><a href="https://github.com/anujgupta2808" target="_blank" rel="noopener noreferrer" aria-label="Open Anuj Gupta's GitHub"><span class="ico" aria-hidden="true">GH</span>GitHub</a><a class="member-link--linkedin" href="https://www.linkedin.com/in/anuj-gupta-7aaabb2b9" target="_blank" rel="noopener noreferrer" aria-label="Open Anuj Gupta's LinkedIn"><span class="ico" aria-hidden="true">in</span>LinkedIn</a><a href="mailto:anujgupta26610812@gmail.com" aria-label="Email Anuj Gupta"><span class="ico" aria-hidden="true">@</span>Email</a></div>
-      </div><span class="member-view" aria-hidden="true">View profile</span></div>
+      <button type="button" class="member-view" data-open-profile aria-label="View profile"><svg class="mv-ico" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8Z"/><circle cx="12" cy="12" r="3"/></svg>View profile</button></div></div>
       <div class="team-card" style="--ti:3" role="button" tabindex="0" aria-haspopup="dialog" aria-label="Open profile dialog for Anisha Gupta"><div class="tc st-item">
         <div class="member-photo"><img src="/anisha.jpeg" alt="Anisha Gupta" loading="lazy" draggable="false" onerror="this.classList.add('err');this.onerror=null"><span class="ph" aria-hidden="true">AG</span></div>
         <button type="button" class="member-name-btn" aria-expanded="false" aria-controls="m3"><span class="member-name">Anisha Gupta</span><span class="member-fold" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M6 2v8M2 6h8"/></svg></span></button>
@@ -1036,7 +1039,7 @@ footer::after{content:'';position:absolute;top:0;left:50%;transform:translateX(-
           </div>
         </div>
         <div class="member-links"><a href="https://github.com/anishagupta8108-gif" target="_blank" rel="noopener noreferrer" aria-label="Open Anisha Gupta's GitHub"><span class="ico" aria-hidden="true">GH</span>GitHub</a><a class="member-link--linkedin" href="https://www.linkedin.com/in/anisha-gupta-917268367/" target="_blank" rel="noopener noreferrer" aria-label="Open Anisha Gupta's LinkedIn"><span class="ico" aria-hidden="true">in</span>LinkedIn</a><a href="mailto:anishagupta8108@gmail.com" aria-label="Email Anisha Gupta"><span class="ico" aria-hidden="true">@</span>Email</a></div>
-      </div><span class="member-view" aria-hidden="true">View profile</span></div>
+      <button type="button" class="member-view" data-open-profile aria-label="View profile"><svg class="mv-ico" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8Z"/><circle cx="12" cy="12" r="3"/></svg>View profile</button></div></div>
       <div class="team-card" style="--ti:4" role="button" tabindex="0" aria-haspopup="dialog" aria-label="Open profile dialog for Anjali Sharma"><div class="tc st-item">
         <div class="member-photo"><img src="/anjali.jpeg" alt="Anjali Sharma" loading="lazy" draggable="false" onerror="this.classList.add('err');this.onerror=null"><span class="ph" aria-hidden="true">AS</span></div>
         <button type="button" class="member-name-btn" aria-expanded="false" aria-controls="m4"><span class="member-name">Anjali Sharma</span><span class="member-fold" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M6 2v8M2 6h8"/></svg></span></button>
@@ -1051,7 +1054,7 @@ footer::after{content:'';position:absolute;top:0;left:50%;transform:translateX(-
           </div>
         </div>
         <div class="member-links"><a href="https://github.com/anjalivinodsharma19-ship-it" target="_blank" rel="noopener noreferrer" aria-label="Open Anjali Sharma's GitHub"><span class="ico" aria-hidden="true">GH</span>GitHub</a><a class="member-link--linkedin" href="https://www.linkedin.com/in/anjali-undefined-9a743742b" target="_blank" rel="noopener noreferrer" aria-label="Open Anjali Sharma's LinkedIn"><span class="ico" aria-hidden="true">in</span>LinkedIn</a><a href="mailto:anjalivinodsharma19@gmail.com" aria-label="Email Anjali Sharma"><span class="ico" aria-hidden="true">@</span>Email</a></div>
-      </div><span class="member-view" aria-hidden="true">View profile</span></div>
+      <button type="button" class="member-view" data-open-profile aria-label="View profile"><svg class="mv-ico" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8Z"/><circle cx="12" cy="12" r="3"/></svg>View profile</button></div></div>
       <div class="team-card" style="--ti:5" role="button" tabindex="0" aria-haspopup="dialog" aria-label="Open profile dialog for Pradyuman Mishra"><div class="tc st-item">
         <div class="member-photo"><img src="/pradyuman.png" alt="Pradyuman Mishra" loading="lazy" draggable="false" onerror="this.classList.add('err');this.onerror=null"><span class="ph" aria-hidden="true">PM</span></div>
         <button type="button" class="member-name-btn" aria-expanded="false" aria-controls="m5"><span class="member-name">Pradyuman Mishra</span><span class="member-fold" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M6 2v8M2 6h8"/></svg></span></button>
@@ -1066,7 +1069,7 @@ footer::after{content:'';position:absolute;top:0;left:50%;transform:translateX(-
           </div>
         </div>
         <div class="member-links"><a href="https://github.com/PradyumanMishra20" target="_blank" rel="noopener noreferrer" aria-label="Open Pradyuman Mishra's GitHub"><span class="ico" aria-hidden="true">GH</span>GitHub</a><a class="member-link--linkedin" href="http://www.linkedin.com/in/pradyuman-mishra-918902402" target="_blank" rel="noopener noreferrer" aria-label="Open Pradyuman Mishra's LinkedIn"><span class="ico" aria-hidden="true">in</span>LinkedIn</a><a href="mailto:pradyuman212@gmail.com" aria-label="Email Pradyuman Mishra"><span class="ico" aria-hidden="true">@</span>Email</a></div>
-      </div><span class="member-view" aria-hidden="true">View profile</span></div>
+      <button type="button" class="member-view" data-open-profile aria-label="View profile"><svg class="mv-ico" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8Z"/><circle cx="12" cy="12" r="3"/></svg>View profile</button></div></div>
     </div>
     <div class="team-note">Orbit IQ // Smart India Hackathon 2026</div>
   </div>
@@ -1135,6 +1138,14 @@ footer::after{content:'';position:absolute;top:0;left:50%;transform:translateX(-
           <div><h3>Email us</h3><p><a href="mailto:orbitIQ2606@gmail.com">orbitIQ2606@gmail.com</a></p></div>
         </div>
         <div class="contact-card st-item">
+          <span class="ico"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.4 2.1L8.1 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.6 2Z"/></svg></span>
+          <div><h3>Call us</h3><p><a href="tel:+919028076580">+91 90280 76580</a></p></div>
+        </div>
+        <div class="contact-card st-item">
+          <span class="ico" style="color:#25D366;border-color:rgba(37,211,102,.42);background:rgba(37,211,102,.1)"><svg viewBox="0 0 24 24" style="fill:currentColor;stroke:none"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.1-2.9.8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.4-3c-.3-.4 0-.6.2-.8l.6-.7c.1-.2.1-.3 0-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1s.9 2.5 1 2.6c.1.2 1.8 2.8 4.4 3.9.6.3 1.1.4 1.5.6.6.2 1.2.2 1.6.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.5-.2Z"/></svg></span>
+          <div><h3>WhatsApp</h3><p><a href="https://wa.me/919028076580" target="_blank" rel="noopener noreferrer">+91 90280 76580</a></p></div>
+        </div>
+        <div class="contact-card st-item">
           <span class="ico"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg></span>
           <div><h3>Mission control</h3><p><b>19.076&deg;N 72.878&deg;E</b> — Mumbai, India</p></div>
         </div>
@@ -1162,7 +1173,7 @@ footer::after{content:'';position:absolute;top:0;left:50%;transform:translateX(-
   <div class="wrap">
     <div class="foot-grid reveal">
       <div class="foot-brand">
-        <div class="name"><img class="foot-logo" src="logo.png" alt="Orbit IQ" width="156" height="52"></div>
+        <div class="name"><img class="foot-logo" src="logo.png" alt="Orbit IQ"></div>
         <p class="foot-desc">Orbit IQ turns plain-language questions about the Earth into satellite intelligence — clear, visual, analyzed answers across desktop and mobile.</p>
         <div class="foot-tag">Earth observation<br>Natural language<br>Applied intelligence</div>
         <div class="foot-social">
@@ -1196,6 +1207,8 @@ footer::after{content:'';position:absolute;top:0;left:50%;transform:translateX(-
         <h5>Get in touch</h5>
         <p>Built for the Smart India Hackathon 2026 as an open, transparent satellite-intelligence project.</p>
         <div class="mi"><svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 2-8 5L4 6h16Zm0 12H4V8l8 5 8-5v10Z"/></svg><span>Email us<br><a href="mailto:orbitIQ2606@gmail.com">orbitIQ2606@gmail.com</a></span></div>
+        <div class="mi"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.4 2.1L8.1 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.6 2Z"/></svg><span>Call us<br><a href="tel:+919028076580"><b>+91 90280 76580</b></a></span></div>
+        <div class="mi"><svg viewBox="0 0 24 24" style="stroke:#25D366;fill:none"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.1-2.9.8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1-.2.2-.6.8-.8 1-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.4-3c-.3-.4 0-.6.2-.8l.6-.7c.1-.2.1-.3 0-.5l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.1s.9 2.5 1 2.6c.1.2 1.8 2.8 4.4 3.9.6.3 1.1.4 1.5.6.6.2 1.2.2 1.6.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.5-.2Z"/></svg><span>WhatsApp<br><a href="https://wa.me/919028076580" target="_blank" rel="noopener noreferrer"><b>+91 90280 76580</b></a></span></div>
       </div>
     </div>
     <div class="foot-bottom reveal">
@@ -1341,7 +1354,8 @@ footer::after{content:'';position:absolute;top:0;left:50%;transform:translateX(-
       {x:.42,y:.86,r:.34,ax:.00008,ay:-.00007,h:'155,123,255',a:.4}
     ];
     var dust = Array.from({length:24}, function(){ return {x:Math.random(),y:Math.random(),r:Math.random()*.9+.5,a:Math.random()*.5+.14,vx:(Math.random()-.5)*.00022,vy:(Math.random()-.5)*.00022}; });
-    var meteor = null, meteorNext = 0;
+    var fallingStars = Array.from({length:28}, function(){ return {x:Math.random(),y:Math.random()*1.2-.2,len:Math.random()*30+12,sp:Math.random()*.0011+.00045,a:Math.random()*.5+.18,o:Math.random()*7}; });
+    var meteors = [], meteorNext = 0;
     function scenePaused(){ return document.hidden || document.body.getAttribute('data-scene')==='tech' || document.body.getAttribute('data-scene')==='carto'; }
     function paint(t){
       if(!ctx) return;
@@ -1356,24 +1370,25 @@ footer::after{content:'';position:absolute;top:0;left:50%;transform:translateX(-
         grad.addColorStop(0,'rgba('+nb.h+','+na+')'); grad.addColorStop(1,'rgba('+nb.h+',0)');
         ctx.fillStyle = grad; ctx.fillRect(0,0,w,h);
       }
-      if(!meteor && t > meteorNext && Math.random() < .05){
+      if(t > meteorNext && meteors.length < 5 && Math.random() < .35){
         var fromLeft = Math.random() < .5;
-        meteor = { x: fromLeft ? -(Math.random()*.08)*w : w*(.12+Math.random()*.8), y:(Math.random()*.34)*h,
-          vx:(fromLeft?1:-1)*(0.9+Math.random()*.7)*w*.0016, vy:(0.55+Math.random()*.45)*h*.0016, life:1, hue:Math.random()<.4?'236,236,244':'63,217,232' };
-        meteorNext = t + 6 + Math.random()*10;
+        meteors.push({ x: fromLeft ? -(Math.random()*.1)*w : w*(.1+Math.random()*.8), y:(Math.random()*.5)*h,
+          vx:(fromLeft?1:-1)*(0.85+Math.random()*.75)*w*.0018, vy:(0.5+Math.random()*.55)*h*.0018, life:1, hue:Math.random()<.45?'235,239,248':(Math.random()<.5?'63,217,232':'155,123,255') });
+        meteorNext = t + 2 + Math.random()*4.5;
       }
-      if(meteor){
-        meteor.life -= .08; meteor.x += meteor.vx; meteor.y += meteor.vy;
-        if(meteor.life > 0){
-          var tailX = meteor.x - meteor.vx*6, tailY = meteor.y - meteor.vy*6;
-          var mg = ctx.createLinearGradient(tailX,tailY,meteor.x,meteor.y);
-          mg.addColorStop(0,'rgba('+meteor.hue+',0)'); mg.addColorStop(1,'rgba('+meteor.hue+','+(.85*meteor.life)+')');
-          ctx.strokeStyle = mg; ctx.lineWidth = 1.6; ctx.lineCap = 'round';
-          ctx.beginPath(); ctx.moveTo(tailX,tailY); ctx.lineTo(meteor.x,meteor.y); ctx.stroke();
-          ctx.fillStyle = 'rgba('+meteor.hue+','+(meteor.life*.85)+')';
-          ctx.beginPath(); ctx.arc(meteor.x,meteor.y,1.7,0,7); ctx.fill();
+      for(var mi = meteors.length-1; mi >= 0; mi--){
+        var m = meteors[mi];
+        m.life -= .055; m.x += m.vx; m.y += m.vy;
+        if(m.life > 0){
+          var tailX = m.x - m.vx*5.5, tailY = m.y - m.vy*5.5;
+          var mg = ctx.createLinearGradient(tailX,tailY,m.x,m.y);
+          mg.addColorStop(0,'rgba('+m.hue+',0)'); mg.addColorStop(1,'rgba('+m.hue+','+(.85*m.life)+')');
+          ctx.strokeStyle = mg; ctx.lineWidth = 1.5; ctx.lineCap = 'round';
+          ctx.beginPath(); ctx.moveTo(tailX,tailY); ctx.lineTo(m.x,m.y); ctx.stroke();
+          ctx.fillStyle = 'rgba('+m.hue+','+(m.life*.9)+')';
+          ctx.beginPath(); ctx.arc(m.x,m.y,2,0,7); ctx.fill();
         }
-        if(meteor.life <= 0 || meteor.y > h*1.05 || meteor.x < -w*.1 || meteor.x > w*1.1) meteor = null;
+        if(m.life <= 0 || m.y > h*1.05 || m.x < -w*.12 || m.x > w*1.12) meteors.splice(mi,1);
       }
       for(i=0;i<dust.length;i++){ var d = dust[i];
         d.x += d.vx; d.y += d.vy;
@@ -1386,6 +1401,16 @@ footer::after{content:'';position:absolute;top:0;left:50%;transform:translateX(-
         var a = Math.max(0, s.a + Math.sin(t*1.4 + i)*.08);
         ctx.beginPath(); ctx.arc(s.x*w, s.y*h, s.r, 0, 7);
         ctx.fillStyle = 'rgba(233,239,246,'+a+')'; ctx.fill();
+      }
+      for(i=0;i<fallingStars.length;i++){ var fs2 = fallingStars[i];
+        fs2.y += fs2.sp;
+        if(fs2.y > 1.08){ fs2.y = -0.05; fs2.x = Math.random(); fs2.len = Math.random()*30+12; }
+        var fx = fs2.x*w, fy = fs2.y*h;
+        var tw = Math.max(0, fs2.a*(.55 + .45*Math.sin(t*1.1 + fs2.o)));
+        var fg = ctx.createLinearGradient(fx,fy,fx,fy+fs2.len);
+        fg.addColorStop(0,'rgba(194,225,250,'+tw+')'); fg.addColorStop(1,'rgba(194,225,250,0)');
+        ctx.strokeStyle = fg; ctx.lineWidth = 1; ctx.lineCap = 'round';
+        ctx.beginPath(); ctx.moveTo(fx,fy); ctx.lineTo(fx,fy+fs2.len); ctx.stroke();
       }
     }
     paint(0);
@@ -1704,6 +1729,9 @@ footer::after{content:'';position:absolute;top:0;left:50%;transform:translateX(-
     card.addEventListener('click', function(e){ if(e.target.closest('a, button')) return; openTeamDialog(card); });
     card.addEventListener('keydown', function(e){
       if((e.key === 'Enter' || e.key === ' ') && e.target === card){ e.preventDefault(); openTeamDialog(card); }
+    });
+    Array.prototype.forEach.call(card.querySelectorAll('.member-view'), function(btn){
+      btn.addEventListener('click', function(e){ e.preventDefault(); e.stopPropagation(); openTeamDialog(card); });
     });
   });
 })();
