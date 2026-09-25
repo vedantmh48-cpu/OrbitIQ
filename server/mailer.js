@@ -33,7 +33,7 @@ export function createMailer() {
   }
 
   function fromAddress() {
-    return { name: 'OrbitIQ', address: process.env.GMAIL_USER };
+    return { name: 'SatQuery AI', address: process.env.GMAIL_USER };
   }
 
   /**
@@ -63,7 +63,7 @@ export function createMailer() {
     await getTransporter().sendMail({
       from: fromAddress(),
       to: cfg.adminTo,
-      subject: 'New OrbitIQ Contact Message',
+      subject: 'New SatQuery AI Contact Message',
       text,
     });
   }
@@ -83,18 +83,18 @@ export function createMailer() {
       '',
       'We received your message successfully.',
       '',
-      'Thank you for contacting OrbitIQ.',
+      'Thank you for contacting SatQuery AI.',
       '',
       'Our team will review your message and get back to you if necessary.',
       '',
       'Regards,',
-      'OrbitIQ Team',
+      'SatQuery AI Team',
     ].join('\n');
 
     await getTransporter().sendMail({
       from: fromAddress(),
       to: record.email,
-      subject: 'We received your message — OrbitIQ',
+      subject: 'We received your message — SatQuery AI',
       text,
     });
   }

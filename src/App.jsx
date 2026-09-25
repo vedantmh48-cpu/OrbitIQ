@@ -3,7 +3,7 @@ import source from '../orbit-iq.html?raw';
 
 const styles = source.match(/<style>([\s\S]*?)<\/style>/)?.[1] ?? '';
 const sourceBody = source.match(/<body>([\s\S]*?)<script>/)?.[1] ?? '';
-const markup = sourceBody.replaceAll('src="logo.png"', 'src="logo.png"');
+const markup = sourceBody.replaceAll('src="logo.png"', 'src="logonew.png"');
 
 function fragment(start, end) {
   const from = markup.indexOf(start);
@@ -16,7 +16,7 @@ function Markup({ html }) {
 }
 
 function BackgroundSystem() {
-  return <Markup html={fragment('<!-- ORBIT IQ OFFICIAL LOGO:', '<!-- ===== NAVBAR ===== -->')} />;
+  return <Markup html={fragment('<!-- SATQUERY AI OFFICIAL LOGO:', '<!-- ===== NAVBAR ===== -->')} />;
 }
 
 function Navbar() {
@@ -24,15 +24,23 @@ function Navbar() {
 }
 
 function Hero() {
-  return <Markup html={fragment('<!-- ===== HERO ===== -->', '<!-- ===== DEMO VIDEO ===== -->')} />;
+  return <Markup html={fragment('<!-- ===== HERO ===== -->', '<!-- ===== SOLUTION VIDEO ===== -->')} />;
+}
+
+function Solution() {
+  return <Markup html={fragment('<!-- ===== SOLUTION VIDEO ===== -->', '<!-- ===== WHAT IS SATQUERY AI ===== -->')} />;
+}
+
+function What() {
+  return <Markup html={fragment('<!-- ===== WHAT IS SATQUERY AI ===== -->', '<!-- ===== DEMO VIDEO ===== -->')} />;
 }
 
 function Demo() {
-  return <Markup html={fragment('<!-- ===== DEMO VIDEO ===== -->', '<!-- ===== WHAT IS ORBIT IQ ===== -->')} />;
+  return <Markup html={fragment('<!-- ===== DEMO VIDEO ===== -->', '<!-- ===== FEATURES ===== -->')} />;
 }
 
-function AboutAndFeatures() {
-  return <Markup html={fragment('<!-- ===== WHAT IS ORBIT IQ ===== -->', '<!-- ===== SCREENSHOTS ===== -->')} />;
+function Features() {
+  return <Markup html={fragment('<!-- ===== FEATURES ===== -->', '<!-- ===== SCREENSHOTS ===== -->')} />;
 }
 
 function Screenshots() {
@@ -160,7 +168,7 @@ function useOrbitInteractions() {
         const observing = Boolean(target.closest('.earth-wrap'));
         document.body.classList.toggle('oi-lock', locked || downloading);
         document.body.classList.toggle('oi-obs', observing);
-        if (observing) label.textContent = 'ORBIT IQ • TRACK';
+        if (observing) label.textContent = 'SATQUERY AI • TRACK';
         dot.style.background = locked ? 'var(--cyan)' : '#fff';
       });
       add(document, 'mousedown', () => { pulse.classList.remove('go'); void pulse.offsetWidth; pulse.classList.add('go'); });
@@ -243,7 +251,7 @@ function useOrbitInteractions() {
     }
 
     const platformGrid = null;
-    const selectPlatform = (id) => { const platform = platforms[id]; if (!platform || !platformGrid) return; platformGrid.querySelectorAll('.platform-card').forEach((card) => { const selected = card.dataset.platform === id; card.classList.toggle('selected', selected); card.setAttribute('aria-pressed', String(selected)); }); document.getElementById('platformLabel').textContent = platform.name; document.getElementById('platformTitle').textContent = `Orbit IQ for ${platform.name}`; document.getElementById('platformDetails').textContent = platform.description + (platform.architecture ? ` · ${platform.architecture}` : ''); };
+    const selectPlatform = (id) => { const platform = platforms[id]; if (!platform || !platformGrid) return; platformGrid.querySelectorAll('.platform-card').forEach((card) => { const selected = card.dataset.platform === id; card.classList.toggle('selected', selected); card.setAttribute('aria-pressed', String(selected)); }); document.getElementById('platformLabel').textContent = platform.name; document.getElementById('platformTitle').textContent = `SatQuery AI for ${platform.name}`; document.getElementById('platformDetails').textContent = platform.description + (platform.architecture ? ` · ${platform.architecture}` : ''); };
     platformGrid?.querySelectorAll('.platform-card').forEach((card) => { add(card, 'click', () => selectPlatform(card.dataset.platform)); add(card, 'keydown', (event) => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); selectPlatform(card.dataset.platform); } }); });
     const goToDownload = () => document.getElementById('download')?.scrollIntoView({ behavior: 'smooth' });
     document.querySelectorAll('.js-download,.js-download-link').forEach((element) => add(element, 'click', (event) => { event.preventDefault(); goToDownload(); }));
@@ -346,5 +354,5 @@ function useOrbitInteractions() {
 export default function App() {
   useOrbitInteractions();
   const css = useMemo(() => styles, []);
-  return <><style>{css}</style><BackgroundSystem /><Navbar /><Hero /><Demo /><AboutAndFeatures /><Screenshots /><Team /><Download /><Contact /><Footer /></>;
+  return <><style>{css}</style><BackgroundSystem /><Navbar /><Hero /><Solution /><What /><Demo /><Features /><Screenshots /><Team /><Download /><Contact /><Footer /></>;
 }
