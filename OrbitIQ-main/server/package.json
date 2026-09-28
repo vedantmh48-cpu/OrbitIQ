@@ -1,0 +1,21 @@
+{
+  "name": "orbit-iq-contact-api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Contact form API for the OrbitIQ download website (Express + MySQL + Nodemailer).",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js",
+    "test": "node --test test/contact.test.js",
+    "test:smoke": "node test/smoke-live.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.3",
+    "express": "^5.2.1",
+    "mysql2": "^3.24.4",
+    "nodemailer": "^10.0.10"
+  }
+}

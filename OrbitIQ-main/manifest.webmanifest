@@ -1,0 +1,25 @@
+{
+  "name": "SatQuery AI",
+  "short_name": "SatQuery",
+  "description": "Satellite intelligence platform for natural-language geospatial analysis.",
+  "start_url": "https://satquery-ai-space.vercel.app/",
+  "scope": "https://satquery-ai-space.vercel.app/",
+  "display": "standalone",
+  "background_color": "#05080E",
+  "theme_color": "#05080E",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
